@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,21 +26,24 @@ public class MemberViewController implements Initializable {
 	@FXML	private Button btnCreate;
 	@FXML	private Button btnUpdate;
 	@FXML	private Button btnDelete;
-	
+	@FXML	private Button btnMessageBox;
 	@FXML	private Button btnExecute;
+	
 	@FXML	private TextArea taExecute;
 	@FXML	private TextField tfExecute;
-	
+
 	@FXML	private TextField tfID;
 	@FXML	private PasswordField tfPW;
 	@FXML	private TextField tfName;
 	@FXML	private TextField tfMobilePhone;
+	@FXML	private TextField tfBirthday;
 	
 	@FXML 	private TableView<Member> tableViewMember;
 	@FXML	private TableColumn<Member, String> columnName;
 	@FXML	private TableColumn<Member, String> columnID;
 	@FXML	private TableColumn<Member, String> columnPW;
-	//@FXML	private TableColumn<Member, String> columnMobilePhone;
+	@FXML	private TableColumn<Member, String> columnMobilePhone;
+	@FXML	private TableColumn<Member, String> columnBirthday;
 	
 	// Member : model이라고도 하고 DTO, VO 라고도 함
 	// 시스템 밖에 저장된 정보를 객체들간에 사용하는 정보로 변환한 자료구조 또는 객체
@@ -61,16 +65,27 @@ public class MemberViewController implements Initializable {
 		columnName.setCellValueFactory(cvf -> cvf.getValue().unameProperty());				
 		columnID.setCellValueFactory(cvf -> cvf.getValue().uidProperty());
 		columnPW.setCellValueFactory(cvf -> cvf.getValue().upwProperty());
+		columnMobilePhone.setCellValueFactory(cvf ->cvf.getValue().mobilePhoneProperty());
+		columnBirthday.setCellValueFactory(cvf ->cvf.getValue().BirthdayProperty());
+
+		
 		
 		tableViewMember.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
 
 		btnCreate.setOnMouseClicked(event -> handleCreate());		
-		// btnDelete.setOnMouseClicked(e -> handleDelete());		
+		btnDelete.setOnMouseClicked(e -> handleDelete());		
 		btnExecute.setOnMouseClicked(event -> handleExecute());	
-		
+		btnMessageBox.setOnMouseClicked(event -> handleMessageBox());
+
 		loadMemberTableView();
 	}
+	@FXML
+	private void handleMessageBox() {
+		this.showAlert("메시지 박스가 나타납니다.");
+	}
+	
+	
 	String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
 	@FXML 
 	private void handleExecute() { // event source, listener, handler
@@ -89,13 +104,15 @@ public class MemberViewController implements Initializable {
 			tfID.setText(member.getUid());
 			tfPW.setText(member.getUpw());
 			tfName.setText(member.getUname());
-//			tfMobilePhone.setText(member.getMobilePhone());
+			tfMobilePhone.setText(member.getMobilePhone());
+			tfBirthday.setText(member.getBirthday());
 		}
 		 else {
 			 tfID.setText("");
 			 tfPW.setText("");
 		     tfName.setText("");
-//		     tfMobilePhone.setText("010");
+		     tfMobilePhone.setText("");
+		     tfBirthday.setText("");
 		 }
 	}
 	
@@ -112,7 +129,7 @@ public class MemberViewController implements Initializable {
 	private void handleCreate() { // event source, listener, handler
 		if(tfID.getText().length() > 0) {
 			Member newMember = 
-					new Member(tfID.getText(), tfPW.getText(), tfName.getText(), "");
+					new Member(tfID.getText(), tfPW.getText(), tfName.getText(),tfMobilePhone.getText(),tfBirthday.getText());
 			data.add(newMember);			
 			tableViewMember.setItems(data);
 			memberService.create(newMember);
@@ -121,7 +138,7 @@ public class MemberViewController implements Initializable {
 	}
 	@FXML 
 	private void handleUpdate() {
-		Member newMember = new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText());
+		Member newMember = new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText(),tfBirthday.getText());
 
 		int selectedIndex = tableViewMember.getSelectionModel().getSelectedIndex();
 		if (selectedIndex >= 0) {
@@ -138,15 +155,15 @@ public class MemberViewController implements Initializable {
 		if (selectedIndex >= 0) {
 			memberService.delete(tableViewMember.getItems().remove(selectedIndex));			
 		} else {
-			showAlert("������ �� �� �����ϴ�.");
+			showAlert("오류");
         }
 	}
 	
 	private void showAlert(String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
         alert.initOwner(mainApp.getRootStage());
-        alert.setTitle("Ȯ��");
-        alert.setContentText("Ȯ�� : " + message);            
+        alert.setTitle("알림");
+        alert.setContentText("경고 : " + message);            
         alert.showAndWait();
 	}
 
