@@ -145,7 +145,7 @@ public class MemberViewController implements Initializable {
 			tableViewMember.getItems().set(selectedIndex, newMember);
 			memberService.update(newMember);			
 		} else {
-			showAlert("������ �� �� �����ϴ�.");          
+			showAlert("수정할 목록을 선택하세요.");          
         }
 	}
 	
