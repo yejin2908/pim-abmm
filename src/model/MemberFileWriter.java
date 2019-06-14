@@ -19,7 +19,8 @@ public class MemberFileWriter {
 				fw.write(m.getUpw() + "\t");
 				fw.write(m.getUname() + "\t");
 				fw.write(m.getMobilePhone() + "\t");
-				fw.write(m.getBirthday() + "\n");
+				fw.write(m.getBirthday() + "\t");
+				fw.write(m.getAge()+"\n");
 				fw.flush();
 			} catch (IOException e) {
 			}			

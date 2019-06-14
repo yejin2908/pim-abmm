@@ -56,6 +56,7 @@
             <TableColumn fx:id="columnName" prefWidth="96.0" text="이름" />
             <TableColumn fx:id="columnMobilePhone" prefWidth="106.0" text="전화번호" />
             <TableColumn fx:id="columnBirthday" prefWidth="152.0" text="주민번호" />
+            <TableColumn fx:id="columnAge" prefWidth="75.0" text="나이" />
         </columns>
       </TableView>
       <Button fx:id="btnExecute" layoutX="681.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#handleExecute" text="실행" />

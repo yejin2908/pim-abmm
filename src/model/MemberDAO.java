@@ -59,7 +59,7 @@ public class MemberDAO {
 				memberList.add(member);
 				fw.saveMember(memberList);
 				ret = 0;
-			}
+			}else ret = -1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
@@ -68,7 +68,17 @@ public class MemberDAO {
 	
 	public int update(Member member) {
 		int ret = -1; // 0 이상이면 해당 아이디가 존재하므로 수정, -1이하이면 수정 실패		
-		
+		try {
+			int index = searchByID(member);
+			if(index >= 0) { // -1이면 검색 실패, 수정 불가
+				fw = new MemberFileWriter(file);
+				memberList.set(index, member);
+				fw.saveMember(memberList);
+				ret = 0;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 		
 		return ret;
 	}	
@@ -76,7 +86,7 @@ public class MemberDAO {
 		int ret = -1;
 		try {
 			int index = searchByID(member);
-			if(index > 0) { // -1이면 검색 실패, 삭제불가능
+			if(index >= 0) { // -1이면 검색 실패, 삭제불가능
 				fw = new MemberFileWriter(file);
 				memberList.remove(member);
 				fw.saveMember(memberList);
@@ -87,6 +97,7 @@ public class MemberDAO {
 		}		
 		return ret;
 	}
+	
 	public void printMemberList() {
 		for(Member m : memberList)
 			System.out.println(m.getUname() + ":" + m.getUid());
