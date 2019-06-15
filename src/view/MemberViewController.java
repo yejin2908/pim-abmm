@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,6 +30,7 @@ public class MemberViewController implements Initializable {
 	@FXML	private Button btnDelete;
 	@FXML	private Button btnMessageBox;
 	@FXML	private Button btnExecute;
+	@FXML	private Button btnSearch;
 	
 	@FXML	private TextArea taExecute;
 	@FXML	private TextField tfExecute;
@@ -38,6 +40,12 @@ public class MemberViewController implements Initializable {
 	@FXML	private TextField tfName;
 	@FXML	private TextField tfMobilePhone;
 	@FXML	private TextField tfBirthday;
+	@FXML 	private TextField tfSearch;
+	
+	@FXML 	private SplitMenuButton smBtnselect;
+	@FXML 	private MenuItem itemID;
+	@FXML 	private MenuItem itemName;
+	@FXML 	private MenuItem itemAge;
 	
 	
 	@FXML 	private TableView<Member> tableViewMember;
@@ -71,8 +79,6 @@ public class MemberViewController implements Initializable {
 		columnMobilePhone.setCellValueFactory(cvf ->cvf.getValue().mobilePhoneProperty());
 		columnBirthday.setCellValueFactory(cvf ->cvf.getValue().birthdayProperty());
 		columnAge.setCellValueFactory(cvf ->cvf.getValue().ageProperty());
-
-		
 		
 		tableViewMember.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
@@ -81,7 +87,7 @@ public class MemberViewController implements Initializable {
 		btnDelete.setOnMouseClicked(e -> handleDelete());		
 		btnExecute.setOnMouseClicked(event -> handleExecute());	
 		btnMessageBox.setOnMouseClicked(event -> handleMessageBox());
-
+	
 		loadMemberTableView();
 	}
 	@FXML
@@ -89,6 +95,10 @@ public class MemberViewController implements Initializable {
 		this.showAlert("메시지 박스가 나타납니다.");
 	}
 	
+	@FXML
+	private void handleSearch() {
+		
+	}
 	
 	String str = ""; // 인스턴스 변수 - 객체 변수, 객체가 존재하는 동안 메모리에 존재
 	@FXML 
@@ -132,8 +142,7 @@ public class MemberViewController implements Initializable {
 	@FXML 
 	private void handleCreate() { // event source, listener, handler
 		if(validation()) {
-			Member newMember = new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText(),
-					tfBirthday.getText(), makeAge());
+			Member newMember = new Member(tfID.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText(), tfBirthday.getText(), makeAge());
 			data.add(newMember);
 			tableViewMember.setItems(data);
 			memberService.create(newMember);
