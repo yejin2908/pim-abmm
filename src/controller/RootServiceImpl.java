@@ -7,7 +7,7 @@ public class RootServiceImpl implements RootService {
 	private File file;
 	
 	public RootServiceImpl() {
-		this("member.txt");
+		this("201612051.txt");
 	}
 	public RootServiceImpl(String filename) {
 		file = new File(filename);
