@@ -21,7 +21,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			this.rootStage = primaryStage;
-	        this.rootStage.setTitle("KMS World!");
+	        this.rootStage.setTitle("kimyejin");
 	        
 			loadMainBoderPane();
 			loadMemberAnchorPane();			

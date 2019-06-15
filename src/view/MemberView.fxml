@@ -15,7 +15,7 @@
 
 <AnchorPane id="memberAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="890.0" stylesheets="@member.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MemberViewController">
    <children>
-      <Label layoutX="190.0" layoutY="521.0" text="Copyright. @2019 minsoo" textFill="#422bb5">
+      <Label layoutX="288.0" layoutY="520.0" text="Copyright. @2019 김예진 (201712037)" textFill="#422bb5">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
