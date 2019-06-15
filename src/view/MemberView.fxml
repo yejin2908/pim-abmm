@@ -2,9 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -15,17 +13,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="790.0" stylesheets="@member.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MemberViewController">
+<AnchorPane id="memberAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="890.0" stylesheets="@member.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MemberViewController">
    <children>
       <Label layoutX="190.0" layoutY="521.0" text="Copyright. @2019 minsoo" textFill="#422bb5">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <GridPane layoutX="18.0" layoutY="25.0" prefHeight="124.0" prefWidth="364.0">
+      <GridPane layoutX="18.0" layoutY="8.0" prefHeight="158.0" prefWidth="248.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="78.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="180.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,46 +31,41 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="아이디" />
+            <Label text="이메일" />
             <Label text="암호" GridPane.rowIndex="1" />
             <Label text="이름" GridPane.rowIndex="2" />
-            <TextField fx:id="tfID" GridPane.columnIndex="1" />            
+            <Label text="생년월일" GridPane.rowIndex="3" />
+            <Label text="주소" GridPane.rowIndex="4" />
+            <Label text="연락처" GridPane.rowIndex="5" />
+            <TextField fx:id="tfEmail" promptText="필수항목" GridPane.columnIndex="1" />            
             <PasswordField fx:id="tfPW" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="tfName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="전화번호" GridPane.rowIndex="3" />
-            <Label text="주민번호" GridPane.rowIndex="4" />
-            <TextField fx:id="tfMobilePhone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="tfBirthday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="tfBirthday" promptText="(형식:19970730)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="tfAddress" promptText="권역별" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="tfMobilePhone" promptText="휴대폰(-없이)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button id="btnCrete" fx:id="btnCreate" layoutX="18.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#handleCreate" text="등록" />
-      <Button id="btnUpdate" fx:id="btnUpdate" layoutX="82.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#handleUpdate" text="수정" />
-      <Button id="btnDelete" fx:id="btnDelete" layoutX="146.0" layoutY="167.0" mnemonicParsing="false" onMouseClicked="#handleDelete" text="삭제" />
+      <Button id="btnCrete" fx:id="btnCreate" layoutX="25.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#handleCreate" prefHeight="27.0" prefWidth="61.0" text="등록" />
+      <Button id="btnUpdate" fx:id="btnUpdate" layoutX="119.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#handleUpdate" prefHeight="27.0" prefWidth="61.0" text="수정" />
+      <Button id="btnDelete" fx:id="btnDelete" layoutX="205.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#handleDelete" prefHeight="27.0" prefWidth="61.0" text="삭제" />
       
-      <TableView fx:id="tableViewMember" layoutX="13.0" layoutY="247.0" prefHeight="263.0" prefWidth="745.0">
+      <TableView fx:id="tableViewMember" layoutX="288.0" layoutY="6.0" prefHeight="220.0" prefWidth="590.0">
         <columns>
-          <TableColumn fx:id="columnID" prefWidth="95.0" text="아이디" />
-          <TableColumn fx:id="columnPW" prefWidth="96.0" text="암호" />
-            <TableColumn fx:id="columnName" prefWidth="96.0" text="이름" />
-            <TableColumn fx:id="columnMobilePhone" prefWidth="106.0" text="전화번호" />
-            <TableColumn fx:id="columnBirthday" prefWidth="152.0" text="주민번호" />
-            <TableColumn fx:id="columnAge" prefWidth="75.0" text="나이" />
+          <TableColumn fx:id="columnEmail" prefWidth="89.0" text="아이디" />
+          <TableColumn fx:id="columnPW" prefWidth="36.0" text="암호" />
+            <TableColumn fx:id="columnName" prefWidth="71.0" text="이름" />
+            <TableColumn fx:id="columnBirthday" prefWidth="124.0" text="생년월일" />
+            <TableColumn fx:id="columnAge" prefWidth="61.0" text="나이" />
+            <TableColumn fx:id="columnAddress" prefWidth="82.0" text="주소" />
+            <TableColumn fx:id="columnMobilePhone" prefWidth="112.0" text="연락처" />
         </columns>
       </TableView>
-      <Button fx:id="btnExecute" layoutX="681.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#handleExecute" text="실행" />
-      <TextArea fx:id="taExecute" layoutX="401.0" layoutY="74.0" prefHeight="152.0" prefWidth="364.0" />
-      <TextField fx:id="tfExecute" layoutX="412.0" layoutY="25.0" prefHeight="23.0" prefWidth="199.0" promptText="입력" />
-      <Button fx:id="btnMessageBox" layoutX="200.0" layoutY="167.0" mnemonicParsing="false" text="메시지박스" />
-      <TextField fx:id="tfSearch" layoutX="127.0" layoutY="213.0" prefHeight="27.0" prefWidth="171.0" promptText="검색어 입력" />
-      <Button fx:id="btnSearch" layoutX="310.0" layoutY="213.0" mnemonicParsing="false" text="검색" />
-      <SplitMenuButton fx:id="smBtnselect" layoutX="18.0" layoutY="213.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="94.0" text="선택">
-        <items>
-          <MenuItem fx:id="itemID" mnemonicParsing="false" text="아이디" />
-          <MenuItem fx:id="itemName" mnemonicParsing="false" text="이름" />
-            <MenuItem fx:id="itemAge" mnemonicParsing="false" text="나이" />
-        </items>
-      </SplitMenuButton>
+      <TextArea fx:id="taFindResult" layoutX="18.0" layoutY="305.0" prefHeight="208.0" prefWidth="859.0" />
+      <TextField fx:id="tfSearch" layoutX="18.0" layoutY="226.0" prefHeight="27.0" prefWidth="175.0" promptText="검색어 입력" />
+      <Button fx:id="btnAddressSearch" layoutX="18.0" layoutY="267.0" mnemonicParsing="false" text="주소검색" />
+      <Button fx:id="btnNameSearch" layoutX="106.0" layoutY="267.0" mnemonicParsing="false" text="이름검색" />
    </children>
 </AnchorPane>

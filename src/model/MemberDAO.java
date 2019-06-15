@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Member;
 import model.MemberFileWriter;
@@ -41,7 +42,7 @@ public class MemberDAO {
 		int ret = -1; // ret가 0 이상이면 검색 성공, -1 이면 검색 실패
 		int index = 0;
 		for(Member m : memberList) {
-			if(m.getUid().equals(member.getUid())) {
+			if(m.getEmail().equals(member.getEmail())) {
 				ret = index;
 				break;
 			}
@@ -100,6 +101,25 @@ public class MemberDAO {
 	
 	public void printMemberList() {
 		for(Member m : memberList)
-			System.out.println(m.getUname() + ":" + m.getUid());
+			System.out.println(m.getName() + ":" + m.getEmail());
+		
+	}
+	public List<Member> searchByAddress(String address) { 
+		List<Member> searched = new ArrayList<Member>();
+		for(Member m : memberList) {
+			if(m.getAddress().equals(address)) {
+				searched.add(m); 
+			}
+		}				
+		return searched;
+	}
+	public List<Member> searchByName(String name) { 
+		List<Member> searched = new ArrayList<Member>();
+		for(Member m : memberList) {
+			if(m.getName().equals(name)) {
+				searched.add(m); 
+			}
+		}				
+		return searched;
 	}
 }

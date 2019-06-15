@@ -18,12 +18,13 @@ public class MemberFileReader {
 		while(sc.hasNext()) {
 			Member m = new Member();
 			String strArr[] = sc.nextLine().split("\t");
-			m.setUid(strArr[0]);
-			m.setUpw(strArr[1]);
-			m.setUname(strArr[2]);
-			m.setMobilePhone(strArr[3]);
-			m.setBirthday(strArr[4]);
-			m.setAge(strArr[5]);
+			m.setEmail(strArr[0]);
+			m.setPw(strArr[1]);
+			m.setName(strArr[2]);
+			m.setBirthday(strArr[3]);
+			m.setAge(strArr[4]);
+			m.setAddress(strArr[5]);
+			m.setMobilePhone(strArr[6]);
 			retObj.add(m);			
 		}
 		return retObj;

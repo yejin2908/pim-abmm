@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Member;
 import model.MemberDAO;
@@ -60,6 +61,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int findByUid(Member member) {
 		return memberDAO.searchByID(member);
+	}
+
+	@Override
+	public List<Member> findByAddress(String address) {
+		return memberDAO.searchByAddress(address);
+
+	}
+	@Override
+	public List<Member> findByName(String name) {
+		return memberDAO.searchByName(name);
+
 	}
 
 }
