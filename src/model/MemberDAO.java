@@ -44,7 +44,7 @@ public class MemberDAO {
 		for(Member m : memberList) {
 			if(m.getEmail().equals(member.getEmail())) {
 				ret = index;
-				break;
+				return index;
 			}
 			index++;
 		}				
