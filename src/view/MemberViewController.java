@@ -169,10 +169,17 @@ public class MemberViewController implements Initializable {
 	private void handleCreate() { // event source, listener, handler
 		if(validation()) {
 			Member newMember = new Member(tfEmail.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText(), tfBirthday.getText(), makeAge(),tfAddress.getText());
+			if(memberService.findByUid(newMember)!=0) //email(=Uid)중복 체크, return값이 -1 일 때 중복
+			{
 			data.add(newMember);
 			tableViewMember.setItems(data);
 			memberService.create(newMember);
+			}
+			else
+				showAlert("아이디 중복");
 		}
+		else
+			showAlert("필수항목 완벽한 입력");
 	}
 	
 	@FXML 
@@ -180,13 +187,18 @@ public class MemberViewController implements Initializable {
 		if(validation()){
 			Member newMember = new Member(tfEmail.getText(), tfPW.getText(), tfName.getText(), tfMobilePhone.getText(), tfBirthday.getText(), makeAge(),tfAddress.getText());
 		int selectedIndex = tableViewMember.getSelectionModel().getSelectedIndex();
-			if (selectedIndex >= 0) {
+		if(selectedIndex != memberService.findByUid(newMember))
+		{
+			showAlert("이메일 수정 불가능");
+		}
+		else if (selectedIndex >= 0) {
 				tableViewMember.getItems().set(selectedIndex, newMember);
 				memberService.update(newMember);			
 			} else {
 				showAlert("수정할 목록을 선택하세요.");          
 			}
 		}
+			
 	}
 	
 	@FXML 
