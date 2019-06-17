@@ -72,7 +72,7 @@ public class MemberViewController implements Initializable {
 		
 		columnName.setCellValueFactory(cvf -> cvf.getValue().nameProperty());				
 		columnEmail.setCellValueFactory(cvf -> cvf.getValue().emailProperty());
-	//	columnPW.setCellValueFactory(cvf -> cvf.getValue().pwProperty());	//pw가 창에 뜨지 않게 하기 위함 
+		columnPW.setCellValueFactory(cvf -> cvf.getValue().pwProperty());	//pw가 창에 뜨지 않게 하기 위함 
 		columnMobilePhone.setCellValueFactory(cvf ->cvf.getValue().mobilePhoneProperty());
 		columnBirthday.setCellValueFactory(cvf ->cvf.getValue().birthdayProperty());
 		columnAge.setCellValueFactory(cvf ->cvf.getValue().ageProperty());
@@ -82,7 +82,7 @@ public class MemberViewController implements Initializable {
 				(observable, oldValue, newValue) -> showMemberInfo(newValue));
 
 		btnCreate.setOnMouseClicked(event -> handleCreate());		
-		btnDelete.setOnMouseClicked(e -> handleDelete());		
+		btnDelete.setOnMouseClicked(event -> handleDelete());		
 		btnUpdate.setOnMouseClicked(event -> handleUpdate());
 		
 		btnAddressSearch.setOnMouseClicked(event->handleFindByAddress());
@@ -245,21 +245,9 @@ public class MemberViewController implements Initializable {
     }
     
     public String makeAge() {
-    	int year = Calendar.getInstance().get(Calendar.YEAR);	//현재 년도에 따라 계산하기 위한 변
+    	int year = Calendar.getInstance().get(Calendar.YEAR);	//현재 년도에 따라 계산하기 위한 변수
     	int birthToInt= Integer.parseInt(tfBirthday.getText().substring(0,4));	//주민번호 앞 네 자리 
-//    	String checkMilli = tfBirthday.getText().substring(6,7);	//주민번호 성별 및 1900년도 2000년도 구분하는 자리
-//    	System.out.print(checkMilli);
-//    	int checkAge = year-2000-birthToInt+1;	//2000년 이후일 경우 식 , 음수 체크 가능 
-//    	
-//    	if(checkMilli.equals("1") || checkMilli.equals("2"))	//1900년대 나이 계산
-//    		return year-1900-birthToInt+1+"";
-//    	else if(checkMilli.equals("3") || checkMilli.equals("4"))	{	//2000년대 나이 계산 
-//    		if(checkAge-1 >= 0)
-//    			return checkAge+"";
-//    		else {	//현재 년도 보다 큰 숫자를 입력했을 경우 null반환 으로 에러 발생 유도 
-//    			return null;
-//    		}
-//    	}
+
     	if(birthToInt < year)
     		return year-birthToInt+1+"";
 		return null;
